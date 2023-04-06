@@ -1,0 +1,44 @@
+<div class="area">
+  <div class="topnav">
+    <a class="active" href="#home">DEMOAPP</a>
+    <div class="topnav-right">
+      <a href="#">HOME</a>
+      <a href="#">ABOUT US</a>
+      <a href="#">JOBS</a>
+      <a href="#">CLIENTS</a>
+      <a href="#">EMPLOYERS</a>
+      <a href="#">CONTACT US</a>
+    </div>
+  </div>
+  <div>
+    <div class="container area" style=" left: 10px;
+            transform: translate(-10px, 50px);">
+      <span>Profile:</span>
+      <div>
+        <img [src]="profileDP" title="profile picture" height="150px" width="150px" />
+        <div>
+          <input type="file" (change)="uploadFile($event)">
+        </div>
+        <div>
+          <button type="submit" class="button1" style="padding: 5;" placeholder="Editprofile" (click)="openRegistrationModal()">Edit Profile</button>
+        </div>
+
+      </div>
+      <div>
+        <p class="title-text">{{data.Firstname}} </p>
+        <p class="info-text">Software Developer</p>
+        <p class="desc-text">Hello, I am {{data.Firstname}}
+          {{data.Lastname}}
+          and I am above {{data.Age}} years. And you can send your emails to {{data.email}}
+          I live in the state of {{data.Country}}. I like to play different outdoor games please reach out to me using
+          my
+          mobile number
+        </p>
+      </div>
+
+    </div>
+
+    <br>
+
+  </div>
+</div>
