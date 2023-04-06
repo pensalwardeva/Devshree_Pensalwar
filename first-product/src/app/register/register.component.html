@@ -1,0 +1,272 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="split left">
+            <div class="form-group">
+                <label for="photo">Photo:</label>
+                <input type="file" class="form-control-file" formControlName="ProfileDP" id="ProfileDP" name="ProfileDP"
+                    (change)="onFileSelected($event)">
+            </div>
+        </div><br>
+        <div class="form-group">
+            <label for="firstName"></label>
+            <input type="text" class="form-control" formControlName="FirstName" id="firstName" placeholder="Firstname"
+                required pattern="[A-Za-z]{1,20}">
+            <div *ngIf="registrationForm.hasError('required', 'FirstName')">
+                Name is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="LastName"></label>
+            <input type="text" class="form-control" id="LastName" formControlName="LastName" placeholder="Last Name"
+                name="LastName" required pattern="[A-Za-z]{1,20}">
+            <div *ngIf="registrationForm.hasError('required', 'LastName')">
+                LastName is required.
+            </div>
+        </div>
+        <div class="form">
+            <label for="Email"></label>
+            <input type="text" class="form-control" id="Email" formControlName="Email" placeholder="Email" name="Email"
+                required pattern="[A-Za-z][@]{1,20}">
+            <div *ngIf="registrationForm.hasError('required', 'Email')">
+                Email is required.
+            </div>
+            <div *ngIf="registrationForm.hasError('email','Email')">
+                Invalid email format.
+            </div>
+
+        </div>
+        <div class="form">
+            <label for="telno"></label>
+            <input id="telNo" class="form-control" formControlName="telNo"  type="tel" placeholder="123-4567-8901"
+                formControlName="telno" required pattern="{1,20}">
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="age">Age:</label>&nbsp;<input for="age" style="width: 30px;" [value]="Age">&nbsp;
+            <label for="age">20</label>
+            <input class="slider" type="range" formControlName="Age" (input)="valueChanged($event)" value="value"
+                id="age" name="age" min="20" max="60">
+            <label for="age">60</label>
+            <div *ngIf="registrationForm.hasError('required', 'Age')">
+                Age is required.
+            </div>
+        </div>
+        <div class="form">
+            <label for="State">State</label>
+            <select class="form-control" formControlName="State" id="State" [value]="State" name="State"
+                placeholder=" State">
+                <option value="">Select an option</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Karnatka">Karnatka</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Tamil Nadus">Tamil Nadus</option>
+            </select>
+            <div *ngIf="registrationForm.hasError('required', 'State')">
+                State is required.
+            </div>
+        </div><br>
+        <div class="form">
+            <label for="Country">Country</label>
+            <select class="form-control" formControlName="Country" [value]="Country" id="Country" name="Country"
+                placeholder="Country">
+                <option value="">Select an option</option>
+                <option value="India">India</option>
+                <option value="Japan">Japan</option>
+                <option value="United States">United States</option>
+                <option value="Russia">Russia</option>
+                <option value="Vietnam">Vietnam</option>
+            </select>
+            <div *ngIf="registrationForm.hasError('required', 'Country')">
+                Country is required.
+            </div>
+        </div>
+        <br>
+
+        <div class="form">
+            <label for="Address">Address</label>
+            <select class="form-control" id="Address" formControlName="Address" name="Address">
+                <option value="">Select an option</option>
+                <option value="home">Home</option>
+                <option value="company">Company</option>
+            </select>
+            <div *ngIf="registrationForm.hasError('required', 'Address')">
+                Address is required.
+            </div>
+            
+            <div class="form">
+                <label for="tags"></label>
+                <input type="text" class="form-control" formControlName="tags" id="tags" placeholder="tags"><br>
+                <button class="close"><i class="fa fa-close"></i> Cricket</button>
+                <button class="close"><i class="fa fa-close"></i> Football</button>
+                <button class="close"><i class="fa fa-close"></i> Hockey</button>
+                <div *ngIf="registrationForm.hasError('required', 'tags')">
+              </div>
+            </div>
+        </div><br>
+        <input type="checkbox" id="subscribe" name="subscribe">
+        <label for="subscribe">Subscribe To Newsletter</label>
+        <div>
+            <button type="button" class="btn btn-primary"
+                (click)="openUserprofileModal(this.registrationForm.value)" [disabled]="!registrationForm.valid">Submit</button>
+            <button (click)="close()" class="btn btn-primary" style="float: right;">Cancel</button>
+        </div>
+    </form>
+</body>
+
+</html> -->
+
+<div class="register-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+        <div class="form-group">
+            <label>Photo:</label>
+            <input type="file" class="form-control" formControlName="ProfileDP"
+                [ngClass]="{ 'is-invalid': submitted && f['ProfileDP'].errors }" id="ProfileDP" name="ProfileDP"
+                (change)="onFileSelected($event)">
+            <div *ngIf="submitted && f['ProfileDP'].errors" class="invalid-feedback">
+                <div *ngIf="f['ProfileDP'].errors['required']">Photo is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>FirstName</label>
+            <input type="text" formControlName="Firstname" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['Firstname'].errors }" />
+            <div *ngIf="submitted && f['Firstname'].errors" class="invalid-feedback">
+                <div *ngIf="f['Firstname'].errors['required']">FirstName is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Lastname</label>
+            <input type="text" formControlName="Lastname" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['Lastname'].errors }" />
+            <div *ngIf="submitted && f['Lastname'].errors" class="invalid-feedback">
+                <div *ngIf="f['Lastname'].errors['required']">Lastname is required</div>
+                <div *ngIf="f['Lastname'].errors['minlength']">
+                    Lastname must be at least 6 characters
+                </div>
+                <div *ngIf="f['Lastname'].errors['maxlength']">
+                    Lastname must not exceed 20 characters
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>email</label>
+            <input type="text" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>telno</label>
+            <input type="text" maxlength="10" formControlName="telno" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['telno'].errors }" />
+            <div *ngIf="submitted && f['telno'].errors" class="invalid-feedback">
+                <div *ngIf="f['telno'].errors['required']">telno is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>&nbsp;<input readonly type="text" 
+            [ngClass]="{ 'is-invalid': submitted && f['Age'].errors }" class="form-control" [value]="Age">&nbsp;
+            <label for="age">20</label>
+            <input class="slider" type="range" formControlName="Age"   (input)="valueChanged($event)" value="value"
+                id="age" name="age" min="20" max="60">
+            <label for="age">60</label>
+            <div *ngIf="submitted && f['Age'].errors" class="invalid-feedback">
+                <div *ngIf="f['Age'].errors['required']">Age is required</div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label>State</label>
+            <select class="form-control" formControlName="State"  id="State" name="State"
+            placeholder="State"[ngClass]="{ 'is-invalid': submitted && f['State'].errors }">
+            <option value="">Select an option</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Karnatka">Karnatka</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Tamil Nadus">Tamil Nadus</option>
+        </select>
+            <div *ngIf="submitted && f['State'].errors" class="invalid-feedback">
+                <div *ngIf="f['State'].errors['required']">State is required</div>
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <label>Country</label>
+            <select class="form-control" formControlName="Country" id="Country" name="Country"
+            placeholder="Country" [ngClass]="{ 'is-invalid': submitted && f['Country'].errors }">
+            <option value="">Select an option</option>
+            <option value="India">India</option>
+            <option value="Japan">Japan</option>
+            <option value="United States">United States</option>
+            <option value="Russia">Russia</option>
+            <option value="Vietnam">Vietnam</option>
+        </select>
+            <div *ngIf="submitted && f['Country'].errors" class="invalid-feedback">
+                <div *ngIf="f['Country'].errors['required']">Country is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <select class="form-control" id="Address" formControlName="Address" name="Address"
+             [ngClass]="{ 'is-invalid': submitted && f['Address'].errors }">
+                <option value="">Select an option</option>
+                <option value="home">Home</option>
+                <option value="company">Company</option>
+            </select>
+            <div *ngIf="submitted && f['Address'].errors" class="invalid-feedback">
+                <div *ngIf="f['Address'].errors['required']">Address is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>tags</label>
+            <input type="text" formControlName="tags" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['tags'].errors }"/>
+                <button class="close"><i class="fa fa-close"></i> Cricket</button>
+                <button class="close"><i class="fa fa-close"></i> Football</button>
+                <button class="close"><i class="fa fa-close"></i> Hockey</button>
+            <div *ngIf="submitted && f['tags'].errors" class="invalid-feedback">
+                <div *ngIf="f['tags'].errors['required']">tags is required</div>
+            </div>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" formControlName="Subscribe" class="form-check-input"
+                [ngClass]="{ 'is-invalid': submitted && f['Subscribe'].errors }" />
+            <label for="Subscribe" class="form-check-label">Subscribe To Newsletter</label>
+            <div *ngIf="submitted && f['Subscribe'].errors" class="invalid-feedback">
+                Subscribe is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" (click)="openUserprofileModal(this.form.value)" (onchange)="close()" class="btn btn-primary" >Submit</button>
+            <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                Reset
+            </button>
+        </div>
+    </form>
+</div>

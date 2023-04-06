@@ -1,0 +1,127 @@
+<div class="register-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>FirstName</label>
+            <input type="text"  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.Firstname" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f['Firstname'].errors }" />
+            <div *ngIf="submitted && f['Firstname'].errors" class="invalid-feedback">
+                <div *ngIf="f['Firstname'].errors['required']">FirstName is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Lastname</label>
+            <input type="text"  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.Lastname" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['Lastname'].errors }" />
+            <div *ngIf="submitted && f['Lastname'].errors" class="invalid-feedback">
+                <div *ngIf="f['Lastname'].errors['required']">Lastname is required</div>
+                <div *ngIf="f['Lastname'].errors['minlength']">
+                    Lastname must be at least 6 characters
+                </div>
+                <div *ngIf="f['Lastname'].errors['maxlength']">
+                    Lastname must not exceed 20 characters
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>email</label>
+            <input type="text"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="data.email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>telno</label>
+            <input type="text" maxlength="10"  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.telno" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['telno'].errors }" />
+            <div *ngIf="submitted && f['telno'].errors" class="invalid-feedback">
+                <div *ngIf="f['telno'].errors['required']">telno is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>&nbsp;<input readonly type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="data.Age" [value]="Age"
+            [ngClass]="{ 'is-invalid': submitted && f['Age'].errors }" class="form-control">&nbsp;
+            <label for="age">20</label>
+            <input class="slider" type="range"  (input)="valueChanged($event)" value="value"
+                id="age" name="age" min="20" max="60">
+            <label for="age">60</label>
+            <div *ngIf="submitted && f['Age'].errors" class="invalid-feedback">
+                <div *ngIf="f['Age'].errors['required']">Age is required</div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label>State</label>
+            <select class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.State" id="State" name="State"
+            placeholder="State"[ngClass]="{ 'is-invalid': submitted && f['State'].errors }">
+            <option value="">Select an option</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Karnatka">Karnatka</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Tamil Nadus">Tamil Nadus</option>
+        </select>
+            <div *ngIf="submitted && f['State'].errors" class="invalid-feedback">
+                <div *ngIf="f['State'].errors['required']">State is required</div>
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <label>Country</label>
+            <select class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.Country"  id="Country" name="Country"
+            placeholder="Country" [ngClass]="{ 'is-invalid': submitted && f['Country'].errors }">
+            <option value="">Select an option</option>
+            <option value="India">India</option>
+            <option value="Japan">Japan</option>
+            <option value="United States">United States</option>
+            <option value="Russia">Russia</option>
+            <option value="Vietnam">Vietnam</option>
+        </select>
+            <div *ngIf="submitted && f['Country'].errors" class="invalid-feedback">
+                <div *ngIf="f['Country'].errors['required']">Country is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <select class="form-control" id="Address"  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.Address" name="Address"
+             [ngClass]="{ 'is-invalid': submitted && f['Address'].errors }">
+                <option value="">Select an option</option>
+                <option value="home">Home</option>
+                <option value="company">Company</option>
+            </select>
+            <div *ngIf="submitted && f['Address'].errors" class="invalid-feedback">
+                <div *ngIf="f['Address'].errors['required']">Address is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>tags</label>
+            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="data.tags" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['tags'].errors }"/>
+                <button class="close"><i class="fa fa-close"></i> Cricket</button>
+                <button class="close"><i class="fa fa-close"></i> Football</button>
+                <button class="close"><i class="fa fa-close"></i> Hockey</button>
+            <div *ngIf="submitted && f['tags'].errors" class="invalid-feedback">
+                <div *ngIf="f['tags'].errors['required']">tags is required</div>
+            </div>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" formControlName="Subscribe"  class="form-check-input"
+                [ngClass]="{ 'is-invalid': submitted && f['Subscribe'].errors }" />
+            <label for="Subscribe" class="form-check-label">Subscribe To Newsletter</label>
+            <div *ngIf="submitted && f['Subscribe'].errors" class="invalid-feedback">
+                Subscribe is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" (click)="openUserprofileModal(this.form.value)"  class="btn btn-primary" >Save</button>
+        </div>
+    </form>
+</div>
